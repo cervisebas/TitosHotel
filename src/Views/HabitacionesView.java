@@ -4,16 +4,21 @@
  */
 package Views;
 
+import model.entities.Habitaciones;
+import Views.Model.HabitacionesTableModel;
+
 /**
  *
  * @author cervisebas
  */
-public class Habitaciones extends javax.swing.JFrame {
+public class HabitacionesView extends javax.swing.JFrame {
+    private HabitacionesTableModel habitacionesTableModel;
 
     /**
      * Creates new form Habitaciones
      */
-    public Habitaciones() {
+    public HabitacionesView() {
+        populateModel();
         initComponents();
     }
 
@@ -37,17 +42,7 @@ public class Habitaciones extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        tabla.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
+        tabla.setModel(habitacionesTableModel);
         tabla.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(tabla);
 
@@ -148,22 +143,38 @@ public class Habitaciones extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Habitaciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HabitacionesView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Habitaciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HabitacionesView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Habitaciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HabitacionesView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Habitaciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HabitacionesView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Habitaciones().setVisible(true);
+                new HabitacionesView().setVisible(true);
             }
         });
+    }
+    
+    private void populateModel() {
+        habitacionesTableModel = new HabitacionesTableModel();
+        
+        for (long i = 1; i < 200; i++) {
+            habitacionesTableModel.addRow(new Habitaciones(
+                    i,
+                    i * 2,
+                    "20",
+                    "40",
+                    200 * i
+                )
+            );
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
