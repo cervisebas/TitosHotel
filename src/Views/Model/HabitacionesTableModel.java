@@ -16,6 +16,11 @@ public class HabitacionesTableModel extends GenericTableModel<Habitaciones>{
         });
         this.setColumnIdentifiers(identifiers);
     }
+    
+    @Override
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return false;
+    }
 
     @Override
     public Class<?> getColumnClass(int columnIndex) {

@@ -6,6 +6,7 @@ package Views;
 
 import model.entities.Habitaciones;
 import Views.Model.HabitacionesTableModel;
+import javax.swing.JTable;
 
 /**
  *
@@ -39,11 +40,17 @@ public class HabitacionesView extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         remove = new javax.swing.JButton();
         edit = new javax.swing.JButton();
+        add = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         tabla.setModel(habitacionesTableModel);
         tabla.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tabla.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tablaMousePressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabla);
 
         jPanel2.setMaximumSize(new java.awt.Dimension(156, 48));
@@ -58,6 +65,7 @@ public class HabitacionesView extends javax.swing.JFrame {
 
         remove.setText("Eliminar");
         remove.setAlignmentX(0.5F);
+        remove.setEnabled(false);
         remove.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 removeActionPerformed(evt);
@@ -66,7 +74,11 @@ public class HabitacionesView extends javax.swing.JFrame {
         jPanel3.add(remove);
 
         edit.setText("Editar");
+        edit.setEnabled(false);
         jPanel3.add(edit);
+
+        add.setText("Añadir");
+        jPanel3.add(add);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -126,6 +138,15 @@ public class HabitacionesView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_removeActionPerformed
 
+    private void tablaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMousePressed
+        JTable source = (JTable)evt.getSource();
+        int row = source.rowAtPoint( evt.getPoint() );
+        
+        Habitaciones habitacion = habitacionesTableModel.getDomainObject(row);
+        remove.setEnabled(true);
+        edit.setEnabled(true);
+    }//GEN-LAST:event_tablaMousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -178,6 +199,7 @@ public class HabitacionesView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton add;
     private javax.swing.JButton edit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
