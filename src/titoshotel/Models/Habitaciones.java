@@ -1,5 +1,5 @@
 
-package model.entities;
+package titoshotel.Models;
 
 
 

@@ -2,10 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package Views;
+package titoshotel.Views;
 
-import model.entities.Habitaciones;
-import Views.Model.HabitacionesTableModel;
+import titoshotel.Models.Habitaciones;
+import titoshotel.Views.Model.HabitacionesTableModel;
+
 import javax.swing.JTable;
 
 /**

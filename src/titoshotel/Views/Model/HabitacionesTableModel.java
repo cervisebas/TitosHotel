@@ -1,8 +1,9 @@
-package Views.Model;
+package titoshotel.Views.Model;
 
 import java.util.Arrays;
 import java.util.List;
-import model.entities.Habitaciones;
+
+import titoshotel.Models.Habitaciones;
 
 public class HabitacionesTableModel extends GenericTableModel<Habitaciones>{
     

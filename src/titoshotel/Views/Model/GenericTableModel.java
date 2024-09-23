@@ -1,4 +1,4 @@
-package Views.Model;
+package titoshotel.Views.Model;
 
 import java.util.ArrayList;
 import java.util.Collections;
