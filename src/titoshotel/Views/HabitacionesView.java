@@ -4,7 +4,7 @@
  */
 package titoshotel.Views;
 
-import titoshotel.Models.Habitaciones;
+import titoshotel.Models.Entities.Habitaciones;
 import titoshotel.Views.Model.HabitacionesTableModel;
 
 import javax.swing.JTable;
@@ -188,14 +188,14 @@ public class HabitacionesView extends javax.swing.JFrame {
         habitacionesTableModel = new HabitacionesTableModel();
         
         for (long i = 1; i < 200; i++) {
-            habitacionesTableModel.addRow(new Habitaciones(
+            /*habitacionesTableModel.addRow(new Habitaciones(
                     i,
                     i * 2,
                     "20",
                     "40",
                     200 * i
                 )
-            );
+            );*/
         }
     }
 

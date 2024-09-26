@@ -3,7 +3,7 @@ package titoshotel.Views.Model;
 import java.util.Arrays;
 import java.util.List;
 
-import titoshotel.Models.Habitaciones;
+import titoshotel.Models.Entities.Habitaciones;
 
 public class HabitacionesTableModel extends GenericTableModel<Habitaciones>{
     
