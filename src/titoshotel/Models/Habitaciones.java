@@ -7,12 +7,12 @@ package titoshotel.Models;
 public class Habitaciones {
     private long id;
     private long numero;
-    private String camasSimples;
-    private String camasDobles;
+    private long camasSimples;
+    private long camasDobles;
     private float precio;
     
     
-    public Habitaciones (Long id, Long numero, String camasSimples, String camasDobles, float precio){
+    public Habitaciones (long id, long numero, long camasSimples, long camasDobles, float precio){
         
         this.id = id;
         this.numero = numero;
@@ -29,11 +29,11 @@ public class Habitaciones {
         return numero;
     }
 
-    public String getCamasSimples() {
+    public long getCamasSimples() {
         return camasSimples;
     }
 
-    public String getCamasDobles() {
+    public long getCamasDobles() {
         return camasDobles;
     }
 
@@ -49,11 +49,11 @@ public class Habitaciones {
         this.numero = numero;
     }
 
-    public void setCamasSimples(String camasSimples) {
+    public void setCamasSimples(long camasSimples) {
         this.camasSimples = camasSimples;
     }
 
-    public void setCamasDobles(String camasDobles) {
+    public void setCamasDobles(long camasDobles) {
         this.camasDobles = camasDobles;
     }
 
