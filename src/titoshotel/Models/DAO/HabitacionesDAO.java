@@ -6,6 +6,9 @@ import titoshotel.Interfaces.DAO;
 import titoshotel.Models.ValueColumns;
 import titoshotel.Models.Entities.Habitaciones;
 import titoshotel.Services.DB;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class HabitacionesDAO implements DAO<Habitaciones> {
     @Override
@@ -46,8 +49,27 @@ public class HabitacionesDAO implements DAO<Habitaciones> {
 
     @Override
     public List<Habitaciones> getAll() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAll'");
+        List<Habitaciones> habitaciones = new ArrayList<Habitaciones>();
+        try {
+            DB db = new DB();
+            ResultSet select = db.selec("habitaciones");
+
+            while (select.next()) {
+                Habitaciones habitacion = new Habitaciones();
+                habitacion.setId(select.getInt("id"));
+                habitacion.setNumero(select.getInt("numero"));
+                habitacion.setPrecio(select.getDouble("precio"));
+                habitacion.setCamasSimples(select.getInt("camasSimples"));
+                habitacion.setCamasDobles(select.getInt("camasDobles"));
+
+                habitaciones.add(habitacion);
+            }
+
+            return habitaciones;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return habitaciones;
+        }
     }
     
 }

@@ -56,5 +56,10 @@ public class Habitaciones {
     public void setPrecio(Double precio) {
         this.precio = precio;
     }
+
+    @Override
+    public String toString() {
+        return "Habitaciones{" + "id=" + id + ", numero=" + numero + ", camasSimples=" + camasSimples + ", camasDobles=" + camasDobles + ", precio=" + precio + '}';
+    }
     
 }

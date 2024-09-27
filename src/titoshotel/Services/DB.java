@@ -1,6 +1,9 @@
 package titoshotel.Services;
 
 import java.util.List;
+
+import com.mysql.cj.xdevapi.Result;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -86,4 +89,57 @@ public class DB {
             return null;
         }
     }
+
+    private String makeWhere(List<ValueColumn> valueColumns) {
+        String where = "";
+
+        for (int i = 0; i < valueColumns.size(); i++) {
+            where += "`" + valueColumns.get(i).getColum() + "` = ?";
+
+            try {
+                valueColumns.get(i + 1);
+                where += ", ";
+            } catch (IndexOutOfBoundsException e) {
+                where += ";";
+            }
+        }
+
+        return where;
+    }
+
+    public ResultSet select(String table, List<ValueColumn> where) {
+        String sqlSelect = "SELECT * FROM ";
+        sqlSelect += "`" + table + "` WHERE ";
+        sqlSelect += makeWhere(where);
+
+        try {
+            PreparedStatement pst = cn.prepareStatement(sqlSelect);
+
+            for (int i = 0; i < where.size(); i++) {
+                pst.setObject(i, where.get(i).getValue());
+            }
+
+            pst.execute();
+
+            return pst.getResultSet();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public ResultSet selec(String table) {
+        String sqlSelect = "SELECT * FROM ";
+        sqlSelect += "`" + table + "`;";
+
+        try {
+            Statement pst = cn.createStatement();
+            
+            return pst.executeQuery(sqlSelect);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }
