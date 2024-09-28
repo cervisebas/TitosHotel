@@ -3,6 +3,7 @@ package titoshotel;
 
 import titoshotel.Models.DAO.HabitacionesDAO;
 import titoshotel.Models.Entities.Habitaciones;
+import titoshotel.Views.HabitacionesView;
 
 public class Program {
 
@@ -17,9 +18,7 @@ public class Program {
 
         habitacionesDAO.save(habitaciones); */
 
-        for (Habitaciones h : habitacionesDAO.getAll()) {
-            System.out.println(h);
-        }
+        (new HabitacionesView()).setVisible(true);
     }
     
 }
