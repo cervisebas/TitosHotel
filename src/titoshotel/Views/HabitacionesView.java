@@ -191,8 +191,8 @@ public class HabitacionesView extends javax.swing.JFrame {
             habitacionesTableModel.addRow(new Habitaciones(
                     i,
                     i * 2,
-                    "20",
-                    "40",
+                    20,
+                    40,
                     200 * i
                 )
             );
