@@ -4,9 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/Users/cervisebas/Documents/NetBeansProjects/TitosHotel/src/titoshotel/Program.java</file>
-            <file>file:/Users/cervisebas/Documents/NetBeansProjects/TitosHotel/src/titoshotel/Models/Entities/Habitaciones.java</file>
+            <file>file:/Users/cervisebas/Documents/NetBeansProjects/TitosHotel/src/titoshotel/Views/HabitacionesListView.java</file>
             <file>file:/Users/cervisebas/Documents/NetBeansProjects/TitosHotel/src/titoshotel/Views/HabitacionesView.java</file>
-            <file>file:/Users/cervisebas/Documents/NetBeansProjects/TitosHotel/src/titoshotel/Models/Entities/Pasajero.java</file>
+            <file>file:/Users/cervisebas/Documents/NetBeansProjects/TitosHotel/src/titoshotel/Views/MenuView.java</file>
         </group>
     </open-files>
 </project-private>
