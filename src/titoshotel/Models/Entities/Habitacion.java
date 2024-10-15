@@ -1,7 +1,7 @@
 
 package titoshotel.Models.Entities;
 
-public class Habitaciones {
+public class Habitacion {
     private Integer id;
     private Integer numero;
     private Integer camasSimples;
@@ -9,8 +9,8 @@ public class Habitaciones {
     private Double precio;
     
     
-    public Habitaciones() {}
-    public Habitaciones(Integer numero, Integer camasSimples, Integer camasDobles, Double precio){
+    public Habitacion() {}
+    public Habitacion(Integer numero, Integer camasSimples, Integer camasDobles, Double precio){
         this.numero = numero;
         this.camasSimples = camasSimples;
         this.camasDobles = camasDobles;

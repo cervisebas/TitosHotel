@@ -4,11 +4,16 @@
  */
 package titoshotel.Views;
 
+import HabitacionController.HabitacionController;
 import java.awt.CardLayout;
+import java.util.Objects;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JTable;
 
-import titoshotel.Models.DAO.HabitacionesDAO;
-import titoshotel.Models.Entities.Habitaciones;
+import titoshotel.Models.DAO.HabitacionDAO;
+import titoshotel.Models.Entities.Habitacion;
 import titoshotel.Views.Model.HabitacionesTableModel;
 
 /**
@@ -17,14 +22,16 @@ import titoshotel.Views.Model.HabitacionesTableModel;
  */
 public class HabitacionesView extends javax.swing.JPanel {
     private HabitacionesTableModel habitacionesTableModel;
-    private Habitaciones habitacionSelect;
+    private Habitacion habitacionSelect;
     private String actualPanel = "table";
+    private HabitacionController controller;
 
     /**
      * Creates new form HabitacionesListView
      */
     public HabitacionesView() {
         habitacionesTableModel = new HabitacionesTableModel();
+        controller = new HabitacionController();
         initComponents();
         loadData();
     }
@@ -37,6 +44,7 @@ public class HabitacionesView extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel1 = new javax.swing.JPanel();
         content = new javax.swing.JPanel();
@@ -59,9 +67,13 @@ public class HabitacionesView extends javax.swing.JPanel {
         buttonCreate = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
+        jPanel11 = new javax.swing.JPanel();
+        jPanel12 = new javax.swing.JPanel();
+        deleted = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
+        buttonsPanel = new javax.swing.JPanel();
         remove = new javax.swing.JButton();
         edit = new javax.swing.JButton();
         add = new javax.swing.JButton();
@@ -234,6 +246,33 @@ public class HabitacionesView extends javax.swing.JPanel {
 
         content.add(jPanel10, "loading");
 
+        jPanel11.setLayout(new java.awt.GridBagLayout());
+
+        jPanel12.setLayout(new java.awt.GridBagLayout());
+
+        deleted.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        deleted.setText("Habitacion eliminada:");
+        deleted.setAlignmentX(0.5F);
+        deleted.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        jPanel12.add(deleted, new java.awt.GridBagConstraints());
+
+        jButton1.setText("Volver");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jButton1MousePressed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.PAGE_END;
+        gridBagConstraints.insets = new java.awt.Insets(12, 0, 0, 0);
+        jPanel12.add(jButton1, gridBagConstraints);
+
+        jPanel11.add(jPanel12, new java.awt.GridBagConstraints());
+
+        content.add(jPanel11, "deleted");
+
         jPanel2.setMaximumSize(new java.awt.Dimension(156, 48));
         jPanel2.setMinimumSize(new java.awt.Dimension(156, 48));
 
@@ -242,16 +281,21 @@ public class HabitacionesView extends javax.swing.JPanel {
 
         java.awt.FlowLayout flowLayout1 = new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT, 5, 10);
         flowLayout1.setAlignOnBaseline(true);
-        jPanel3.setLayout(flowLayout1);
+        buttonsPanel.setLayout(flowLayout1);
 
         remove.setText("Eliminar");
         remove.setAlignmentX(0.5F);
         remove.setEnabled(false);
-        jPanel3.add(remove);
+        remove.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                removeMousePressed(evt);
+            }
+        });
+        buttonsPanel.add(remove);
 
         edit.setText("Editar");
         edit.setEnabled(false);
-        jPanel3.add(edit);
+        buttonsPanel.add(edit);
 
         add.setText("Añadir");
         add.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -259,7 +303,7 @@ public class HabitacionesView extends javax.swing.JPanel {
                 addMousePressed(evt);
             }
         });
-        jPanel3.add(add);
+        buttonsPanel.add(add);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -269,7 +313,7 @@ public class HabitacionesView extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(buttonsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -280,7 +324,7 @@ public class HabitacionesView extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(5, 5, 5)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(buttonsPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -314,10 +358,11 @@ public class HabitacionesView extends javax.swing.JPanel {
         JTable source = (JTable) evt.getSource();
         int row = source.rowAtPoint(evt.getPoint());
 
-        Habitaciones habitacion = habitacionesTableModel.getDomainObject(row);
+        Habitacion habitacion = habitacionesTableModel.getDomainObject(row);
 
-        if (habitacionSelect == null || habitacion.getId() != habitacionSelect.getId()) {
+        if (habitacionSelect == null || !Objects.equals(habitacion.getId(), habitacionSelect.getId())) {
             habitacionSelect = habitacion;
+            System.out.println(habitacionSelect);
             remove.setEnabled(true);
             edit.setEnabled(true);
         } else {
@@ -347,6 +392,22 @@ public class HabitacionesView extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_addMousePressed
 
+    private void removeMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_removeMousePressed
+        if (habitacionSelect != null) {
+            System.out.println(habitacionSelect);
+            
+            controller.remove(habitacionSelect.getId());
+            loadData();
+            deleted.setText("Habitacion eliminada: N° " + habitacionSelect.getNumero());
+            changePanel("deleted");
+        }
+    }//GEN-LAST:event_removeMousePressed
+
+    private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
+        changePanel("table");
+        loadData();
+    }//GEN-LAST:event_jButton1MousePressed
+
     private void unSelectTable() {
         habitacionSelect = null;
         tabla.clearSelection();
@@ -364,11 +425,11 @@ public class HabitacionesView extends javax.swing.JPanel {
     }
     
     private void createHabitacion() {
-        Habitaciones nueva = new Habitaciones();
-        nueva.setNumero(Integer.parseInt(this.fieldNumero.getText()));
-        nueva.setPrecio(Double.parseDouble(this.fieldPrecio.getText()));
-        nueva.setCamasSimples(Integer.parseInt(this.fieldCamasSimples.getText()));
-        nueva.setCamasDobles(Integer.parseInt(this.fieldCamasDobles.getText()));
+        Habitacion nueva = new Habitacion();
+        nueva.setNumero(Integer.valueOf(this.fieldNumero.getText()));
+        nueva.setPrecio(Double.valueOf(this.fieldPrecio.getText()));
+        nueva.setCamasSimples(Integer.valueOf(this.fieldCamasSimples.getText()));
+        nueva.setCamasDobles(Integer.valueOf(this.fieldCamasDobles.getText()));
 
         this.add.setEnabled(false);
         this.fieldNumero.setEnabled(false);
@@ -376,8 +437,7 @@ public class HabitacionesView extends javax.swing.JPanel {
         this.fieldCamasDobles.setEnabled(false);
         this.fieldCamasSimples.setEnabled(false);
         
-        HabitacionesDAO hDao = new HabitacionesDAO();
-        hDao.save(nueva);
+        controller.save(nueva);
 
         this.add.setEnabled(true);
         this.fieldNumero.setEnabled(true);
@@ -404,10 +464,8 @@ public class HabitacionesView extends javax.swing.JPanel {
     private void loadData() {
         changePanel("loading");
         habitacionesTableModel.clearTableModelData();
-
-        HabitacionesDAO habitacionesDAO = new HabitacionesDAO();
         
-        for (Habitaciones h : habitacionesDAO.getAll()) {
+        for (Habitacion h : controller.getAll()) {
             habitacionesTableModel.addRow(h);
         }
         changePanel("table");
@@ -416,12 +474,15 @@ public class HabitacionesView extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton add;
     private javax.swing.JButton buttonCreate;
+    private javax.swing.JPanel buttonsPanel;
     private javax.swing.JPanel content;
+    private javax.swing.JLabel deleted;
     private javax.swing.JButton edit;
     private javax.swing.JTextField fieldCamasDobles;
     private javax.swing.JTextField fieldCamasSimples;
     private javax.swing.JTextField fieldNumero;
     private javax.swing.JTextField fieldPrecio;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -430,8 +491,9 @@ public class HabitacionesView extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;

@@ -2,8 +2,6 @@ package titoshotel.Services;
 
 import java.util.List;
 
-import com.mysql.cj.xdevapi.Result;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -21,7 +19,7 @@ public class DB {
     private String user = "root";
     private String password = "Calle58744";
     
-    private Connection cn;
+    static private Connection cn;
 
     public DB() {
         String url = "jdbc:";
@@ -33,7 +31,9 @@ public class DB {
         url += password;
         
         try {
-            cn = DriverManager.getConnection(url);
+            if (cn == null) {
+                cn = DriverManager.getConnection(url);
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -142,4 +142,51 @@ public class DB {
         }
     }
 
+    public void delete(String table, Integer id) {
+        String sqlSelect = "DELETE FROM ";
+        sqlSelect += "`" + table + "` WHERE `id` = ?";
+
+        try {
+            PreparedStatement pst = cn.prepareStatement(sqlSelect);
+            pst.setInt(1, id);
+            
+            pst.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void update(String table, Integer id, List<ValueColumn> valueColumns) {
+        String sqlUpdate = "UPDATE `";
+        sqlUpdate += table + "` SET ";
+
+        for (int i = 0; i < valueColumns.size(); i++) {
+            sqlUpdate += valueColumns.get(i).getColum();
+            sqlUpdate += " = ?";
+            
+            try {
+                valueColumns.get(i + 1);
+                sqlUpdate += ",";
+            } catch (IndexOutOfBoundsException e) {
+                sqlUpdate += " WHERE `id` = ";
+                sqlUpdate += id.toString();
+                sqlUpdate += ";";
+            }
+        }
+
+        try {
+            PreparedStatement pst = cn.prepareStatement(sqlUpdate);
+
+            for (int i = 0; i < valueColumns.size(); i++) {
+                pst.setObject(
+                    i + 1,
+                    valueColumns.get(i).getValue()
+                );
+            }
+
+            pst.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

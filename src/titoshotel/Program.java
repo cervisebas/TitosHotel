@@ -6,7 +6,8 @@ import titoshotel.Views.MenuView;
 public class Program {
 
     public static void main(String[] args) {
-        (new MenuView()).setVisible(true);
+        MenuView menuView = new MenuView();
+        menuView.setVisible(true);
     }
     
 }

@@ -3,9 +3,9 @@ package titoshotel.Views.Model;
 import java.util.Arrays;
 import java.util.List;
 
-import titoshotel.Models.Entities.Habitaciones;
+import titoshotel.Models.Entities.Habitacion;
 
-public class HabitacionesTableModel extends GenericTableModel<Habitaciones>{
+public class HabitacionesTableModel extends GenericTableModel<Habitacion>{
     
     public HabitacionesTableModel() {
         List<String> identifiers = Arrays.asList(new String[]{
@@ -35,7 +35,7 @@ public class HabitacionesTableModel extends GenericTableModel<Habitaciones>{
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Habitaciones c = this.getDomainObject(rowIndex);
+        Habitacion c = this.getDomainObject(rowIndex);
         switch (columnIndex) {
             case 0: return c.getNumero();
             case 1: return c.getCamasSimples();
