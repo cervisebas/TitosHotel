@@ -6,6 +6,7 @@ import java.util.List;
 import javax.swing.event.EventListenerList;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 
 /*
@@ -16,7 +17,7 @@ luego especificarse para un tipo <T>.
 Los modelos de tablas trabajan con listeners (la tabla gráfica) que debe dibujar 
 el contenido cada vez que se agrega, elimina o modifican los datos del modelo.
 */
-public abstract class GenericTableModel<T> implements TableModel {
+public abstract class GenericTableModel<T> extends AbstractTableModel implements TableModel {
 
     private EventListenerList listeners;
     private List columnIndentifiers;
@@ -109,6 +110,7 @@ public abstract class GenericTableModel<T> implements TableModel {
         int rowIndex = this.data.size();
         this.data.add(object);
         notifyTableRowsInserted(rowIndex, rowIndex);
+        this.fireTableDataChanged();
     }
 
     public void addRows(List<T> objects) {

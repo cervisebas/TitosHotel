@@ -1,4 +1,4 @@
-package titoshotel.Models;
+package titoshotel.Models.Entities;
 
 public class Pasajero {
     protected Integer Id;
