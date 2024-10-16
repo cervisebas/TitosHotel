@@ -1,4 +1,4 @@
-package HabitacionController;
+package titoshotel.Controllers;
 
 import java.util.List;
 import titoshotel.Models.DAO.HabitacionDAO;

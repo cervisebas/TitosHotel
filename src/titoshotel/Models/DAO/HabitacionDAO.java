@@ -36,7 +36,8 @@ public class HabitacionDAO implements DAO<Habitacion> {
         values.setValue("camasDobles", c.getCamasDobles());
         values.setValue("precio", c.getPrecio());
 
-        db.insert(tableName, values.getList());
+        Integer newId = db.insert(tableName, values.getList());
+        c.setId(newId);
         list.add(c);
     }
 
@@ -69,6 +70,15 @@ public class HabitacionDAO implements DAO<Habitacion> {
         DB db = new DB();
 
         db.delete(tableName, id);
+        
+        int index = -1;
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getId() == id) {
+                index = i;
+                break;
+            }
+        }
+        list.remove(index);
     }
 
     @Override
