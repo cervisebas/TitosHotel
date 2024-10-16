@@ -10,7 +10,16 @@ public class Habitacion {
     
     
     public Habitacion() {}
+    
     public Habitacion(Integer numero, Integer camasSimples, Integer camasDobles, Double precio){
+        this.numero = numero;
+        this.camasSimples = camasSimples;
+        this.camasDobles = camasDobles;
+        this.precio = precio;
+    }
+
+    public Habitacion(Integer id, Integer numero, Integer camasSimples, Integer camasDobles, Double precio) {
+        this.id = id;
         this.numero = numero;
         this.camasSimples = camasSimples;
         this.camasDobles = camasDobles;
@@ -62,4 +71,14 @@ public class Habitacion {
         return "Habitaciones{" + "id=" + id + ", numero=" + numero + ", camasSimples=" + camasSimples + ", camasDobles=" + camasDobles + ", precio=" + precio + '}';
     }
     
+    @Override
+    public Habitacion clone() {
+        return new Habitacion(
+            id,
+            numero,
+            camasSimples,
+            camasDobles,
+            precio
+        );
+    }
 }
