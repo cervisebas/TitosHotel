@@ -3,13 +3,12 @@ package titoshotel.Views.Model;
 import java.util.Arrays;
 import java.util.List;
 
-import titoshotel.Models.Habitaciones;
+import titoshotel.Models.Entities.Habitacion;
 
-public class HabitacionesTableModel extends GenericTableModel<Habitaciones>{
+public class HabitacionesTableModel extends GenericTableModel<Habitacion>{
     
     public HabitacionesTableModel() {
         List<String> identifiers = Arrays.asList(new String[]{
-            "Id",
             "Numero",
             "Camas simples",
             "Camas dobles",
@@ -27,23 +26,21 @@ public class HabitacionesTableModel extends GenericTableModel<Habitaciones>{
     public Class<?> getColumnClass(int columnIndex) {
         switch (columnIndex) {
             case 0: return Long.class;
-            case 1: return Long.class;
+            case 1: return String.class;
             case 2: return String.class;
-            case 3: return String.class;
-            case 4: return Float.class;
+            case 3: return Float.class;
             default: throw new ArrayIndexOutOfBoundsException(columnIndex);
         }
     }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Habitaciones c = this.getDomainObject(rowIndex);
+        Habitacion c = this.getDomainObject(rowIndex);
         switch (columnIndex) {
-            case 0: return c.getId();
-            case 1: return c.getNumero();
-            case 2: return c.getCamasSimples();
-            case 3: return c.getCamasDobles();
-            case 4: return c.getPrecio();
+            case 0: return c.getNumero();
+            case 1: return c.getCamasSimples();
+            case 2: return c.getCamasDobles();
+            case 3: return c.getPrecio();
             default: throw new ArrayIndexOutOfBoundsException(columnIndex);
         }
     }

@@ -1,11 +1,13 @@
 
 package titoshotel;
 
+import titoshotel.Views.MenuView;
 
 public class Program {
 
     public static void main(String[] args) {
-        // TODO code application logic here
+        MenuView menuView = new MenuView();
+        menuView.setVisible(true);
     }
     
 }
