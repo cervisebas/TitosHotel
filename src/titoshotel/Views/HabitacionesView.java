@@ -13,6 +13,7 @@ public class HabitacionesView extends javax.swing.JPanel {
     private Habitacion habitacionSelect;
     private String actualPanel = "table";
     private final HabitacionController controller;
+    private int updateId;
 
     
     public HabitacionesView() {
@@ -30,9 +31,9 @@ public class HabitacionesView extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         content = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        tableScrollPane = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
-        jPanel4 = new javax.swing.JPanel();
+        createPanel = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         fieldNumero = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -47,9 +48,10 @@ public class HabitacionesView extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         createButton = new javax.swing.JButton();
-        jPanel10 = new javax.swing.JPanel();
+        editButton = new javax.swing.JButton();
+        loadingPanel = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        jPanel11 = new javax.swing.JPanel();
+        deletedPanel = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
         deleted = new javax.swing.JLabel();
         goBackDeleteButton = new javax.swing.JButton();
@@ -68,9 +70,9 @@ public class HabitacionesView extends javax.swing.JPanel {
                 tablaMousePressed(evt);
             }
         });
-        jScrollPane1.setViewportView(tabla);
+        tableScrollPane.setViewportView(tabla);
 
-        content.add(jScrollPane1, "table");
+        content.add(tableScrollPane, "table");
 
         jPanel5.setMaximumSize(new java.awt.Dimension(200, 32767));
 
@@ -172,34 +174,42 @@ public class HabitacionesView extends javax.swing.JPanel {
         });
         jPanel9.add(createButton);
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        editButton.setText("Editar habitación");
+        editButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                editButtonMousePressed(evt);
+            }
+        });
+        jPanel9.add(editButton);
+
+        javax.swing.GroupLayout createPanelLayout = new javax.swing.GroupLayout(createPanel);
+        createPanel.setLayout(createPanelLayout);
+        createPanelLayout.setHorizontalGroup(
+            createPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(createPanelLayout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(createPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(createPanelLayout.createSequentialGroup()
                         .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(createPanelLayout.createSequentialGroup()
+                        .addGroup(createPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(createPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        createPanelLayout.setVerticalGroup(
+            createPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(createPanelLayout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(createPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(createPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -207,28 +217,28 @@ public class HabitacionesView extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
-        content.add(jPanel4, "form");
+        content.add(createPanel, "form");
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Cargando...");
         jLabel6.setAlignmentX(0.5F);
 
-        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
-        jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout loadingPanelLayout = new javax.swing.GroupLayout(loadingPanel);
+        loadingPanel.setLayout(loadingPanelLayout);
+        loadingPanelLayout.setHorizontalGroup(
+            loadingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
         );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
+        loadingPanelLayout.setVerticalGroup(
+            loadingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(loadingPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE))
         );
 
-        content.add(jPanel10, "loading");
+        content.add(loadingPanel, "loading");
 
-        jPanel11.setLayout(new java.awt.GridBagLayout());
+        deletedPanel.setLayout(new java.awt.GridBagLayout());
 
         jPanel12.setLayout(new java.awt.GridBagLayout());
 
@@ -251,9 +261,9 @@ public class HabitacionesView extends javax.swing.JPanel {
         gridBagConstraints.insets = new java.awt.Insets(12, 0, 0, 0);
         jPanel12.add(goBackDeleteButton, gridBagConstraints);
 
-        jPanel11.add(jPanel12, new java.awt.GridBagConstraints());
+        deletedPanel.add(jPanel12, new java.awt.GridBagConstraints());
 
-        content.add(jPanel11, "deleted");
+        content.add(deletedPanel, "deleted");
 
         jPanel2.setMaximumSize(new java.awt.Dimension(156, 48));
         jPanel2.setMinimumSize(new java.awt.Dimension(156, 48));
@@ -277,6 +287,11 @@ public class HabitacionesView extends javax.swing.JPanel {
 
         edit.setText("Editar");
         edit.setEnabled(false);
+        edit.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                editMousePressed(evt);
+            }
+        });
         buttonsPanel.add(edit);
 
         add.setText("Añadir");
@@ -336,6 +351,7 @@ public class HabitacionesView extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    // Events
     private void tablaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaMousePressed
         JTable source = (JTable) evt.getSource();
         int row = source.rowAtPoint(evt.getPoint());
@@ -363,6 +379,8 @@ public class HabitacionesView extends javax.swing.JPanel {
             add.setText("Volver");
             edit.setVisible(false);
             remove.setVisible(false);
+            createButton.setVisible(true);
+            editButton.setVisible(false);
         } else {
             changePanel("table");
             add.setText("Añadir");
@@ -387,6 +405,50 @@ public class HabitacionesView extends javax.swing.JPanel {
         loadData();
     }//GEN-LAST:event_goBackDeleteButtonMousePressed
 
+    private void editMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editMousePressed
+        if (actualPanel.equals("table")) {
+            updateId = habitacionSelect.getId();
+            fieldCamasDobles.setText(habitacionSelect.getCamasDobles().toString());
+            fieldCamasSimples.setText(habitacionSelect.getCamasSimples().toString());
+            fieldNumero.setText(habitacionSelect.getNumero().toString());
+            fieldPrecio.setText(habitacionSelect.getPrecio().toString());
+            
+            changePanel("form");
+            add.setText("Volver");
+            edit.setVisible(false);
+            remove.setVisible(false);
+            createButton.setVisible(false);
+            editButton.setVisible(true);
+        } else {
+            changePanel("table");
+            add.setText("Añadir");
+            edit.setVisible(true);
+            remove.setVisible(true);
+            createButton.setVisible(true);
+            editButton.setVisible(false);
+        }
+    }//GEN-LAST:event_editMousePressed
+
+    private void editButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editButtonMousePressed
+        controller.update(
+            new Habitacion(
+                updateId,
+                Integer.valueOf(this.fieldNumero.getText()),
+                Integer.valueOf(this.fieldCamasSimples.getText()),
+                Integer.valueOf(this.fieldCamasDobles.getText()),
+                Double.valueOf(this.fieldPrecio.getText())
+            )
+        );
+        changePanel("table");
+        add.setText("Añadir");
+        edit.setVisible(true);
+        remove.setVisible(true);
+        createButton.setVisible(true);
+        editButton.setVisible(false);
+        loadData();
+    }//GEN-LAST:event_editButtonMousePressed
+
+    // Methods
     private void unSelectTable() {
         habitacionSelect = null;
         tabla.clearSelection();
@@ -446,7 +508,6 @@ public class HabitacionesView extends javax.swing.JPanel {
         
         for (Habitacion h : controller.getAll()) {
             habitacionesTableModel.addRow(h);
-            System.out.println(h);
         }
         changePanel("table");
     }
@@ -456,8 +517,11 @@ public class HabitacionesView extends javax.swing.JPanel {
     private javax.swing.JPanel buttonsPanel;
     private javax.swing.JPanel content;
     private javax.swing.JButton createButton;
+    private javax.swing.JPanel createPanel;
     private javax.swing.JLabel deleted;
+    private javax.swing.JPanel deletedPanel;
     private javax.swing.JButton edit;
+    private javax.swing.JButton editButton;
     private javax.swing.JTextField fieldCamasDobles;
     private javax.swing.JTextField fieldCamasSimples;
     private javax.swing.JTextField fieldNumero;
@@ -470,18 +534,16 @@ public class HabitacionesView extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel loadingPanel;
     private javax.swing.JButton remove;
     private javax.swing.JTable tabla;
+    private javax.swing.JScrollPane tableScrollPane;
     // End of variables declaration//GEN-END:variables
 }

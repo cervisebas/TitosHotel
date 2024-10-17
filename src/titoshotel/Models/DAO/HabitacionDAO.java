@@ -26,6 +26,17 @@ public class HabitacionDAO implements DAO<Habitacion> {
         }
         return instance;
     }
+    
+    private int findIndexById(Integer id) {
+        int index = -1;
+        for (int i = 0; i < list.size(); i++) {
+            if (list.get(i).getId() == id) {
+                index = i;
+                break;
+            }
+        }
+        return index;
+    }
 
     @Override
     public void save(Habitacion c) {
@@ -49,15 +60,13 @@ public class HabitacionDAO implements DAO<Habitacion> {
         values.setValue("camasSimples", c.getCamasSimples());
         values.setValue("camasDobles", c.getCamasDobles());
         values.setValue("precio", c.getPrecio());
-
+ 
         db.update(tableName, c.getId(), values.getList());
         
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getId() == c.getId()) {
-                list.set(i, c);
-                break;
-            }
-        }
+        list.set(
+            findIndexById(c.getId()),
+            c
+        );
     }
 
     @Override
@@ -70,15 +79,7 @@ public class HabitacionDAO implements DAO<Habitacion> {
         DB db = new DB();
 
         db.delete(tableName, id);
-        
-        int index = -1;
-        for (int i = 0; i < list.size(); i++) {
-            if (list.get(i).getId() == id) {
-                index = i;
-                break;
-            }
-        }
-        list.remove(index);
+        list.remove(findIndexById(id));
     }
 
     @Override
