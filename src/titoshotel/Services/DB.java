@@ -2,6 +2,8 @@ package titoshotel.Services;
 
 import java.util.List;
 
+import titoshotel.Models.DAO.Utils.ValueColumn;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -9,15 +11,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import titoshotel.Models.ValueColumn;
-
 public class DB {
     private String engine = "mysql";
     private String server = "localhost";
     private String port = "3306";
-    private String database = "ejemplo";
+    private String database = "titos_hotel";
     private String user = "root";
-    private String password = "Calle58744";
+    private String password = "";
     
     static private Connection cn;
 
