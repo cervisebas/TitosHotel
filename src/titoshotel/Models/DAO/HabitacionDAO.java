@@ -43,8 +43,8 @@ public class HabitacionDAO implements DAO<Habitacion> {
         DB db = new DB();
         ValueColumns values = new ValueColumns();
         values.setValue("numero", c.getNumero());
-        values.setValue("camasSimples", c.getCamasSimples());
-        values.setValue("camasDobles", c.getCamasDobles());
+        values.setValue("camas_simples", c.getCamasSimples());
+        values.setValue("camas_dobles", c.getCamasDobles());
         values.setValue("precio", c.getPrecio());
 
         Integer newId = db.insert(tableName, values.getList());
@@ -57,8 +57,8 @@ public class HabitacionDAO implements DAO<Habitacion> {
         DB db = new DB();
         ValueColumns values = new ValueColumns();
         values.setValue("numero", c.getNumero());
-        values.setValue("camasSimples", c.getCamasSimples());
-        values.setValue("camasDobles", c.getCamasDobles());
+        values.setValue("camas_simples", c.getCamasSimples());
+        values.setValue("camas_dobles", c.getCamasDobles());
         values.setValue("precio", c.getPrecio());
  
         db.update(tableName, c.getId(), values.getList());
@@ -104,8 +104,8 @@ public class HabitacionDAO implements DAO<Habitacion> {
                 habitacion.setId(select.getInt("id"));
                 habitacion.setNumero(select.getInt("numero"));
                 habitacion.setPrecio(select.getDouble("precio"));
-                habitacion.setCamasSimples(select.getInt("camasSimples"));
-                habitacion.setCamasDobles(select.getInt("camasDobles"));
+                habitacion.setCamasSimples(select.getInt("camas_simples"));
+                habitacion.setCamasDobles(select.getInt("camas_dobles"));
 
                 habitaciones.add(habitacion);
             }
