@@ -2,14 +2,14 @@ package titoshotel.Services;
 
 import java.util.List;
 
+import titoshotel.Models.DAO.Utils.ValueColumn;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
-import titoshotel.Models.ValueColumn;
 
 public class DB {
     private String engine = "mysql";
