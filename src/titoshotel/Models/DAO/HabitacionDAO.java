@@ -3,7 +3,7 @@ package titoshotel.Models.DAO;
 import java.util.List;
 
 import titoshotel.Interfaces.DAO;
-import titoshotel.Models.ValueColumns;
+import titoshotel.Models.DAO.Utils.ValueColumns;
 import titoshotel.Models.Entities.Habitacion;
 import titoshotel.Services.DB;
 import java.sql.ResultSet;
@@ -84,7 +84,6 @@ public class HabitacionDAO implements DAO<Habitacion> {
 
     @Override
     public Habitacion get(int id) {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'get'");
     }
 

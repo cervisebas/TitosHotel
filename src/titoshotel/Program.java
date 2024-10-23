@@ -1,4 +1,3 @@
-
 package titoshotel;
 
 import titoshotel.Views.MenuView;

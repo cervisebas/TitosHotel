@@ -1,4 +1,3 @@
-
 package titoshotel.Models.Entities;
 
 public class Habitacion {

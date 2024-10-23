@@ -2,16 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/Users/cervisebas/Documents/NetBeansProjects/TitosHotel/src/titoshotel/Program.java</file>
-            <file>file:/Users/cervisebas/Documents/NetBeansProjects/TitosHotel/src/titoshotel/Models/DAO/HabitacionDAO.java</file>
-            <file>file:/Users/cervisebas/Documents/NetBeansProjects/TitosHotel/src/titoshotel/Views/Model/HabitacionesTableModel.java</file>
-            <file>file:/Users/cervisebas/Documents/NetBeansProjects/TitosHotel/src/titoshotel/Views/HabitacionesView.java</file>
-            <file>file:/Users/cervisebas/Documents/NetBeansProjects/TitosHotel/src/titoshotel/Views/PasajerosView.java</file>
-            <file>file:/Users/cervisebas/Documents/NetBeansProjects/TitosHotel/src/titoshotel/Services/DB.java</file>
-            <file>file:/Users/cervisebas/Documents/NetBeansProjects/TitosHotel/src/titoshotel/Views/Model/GenericTableModel.java</file>
-            <file>file:/Users/cervisebas/Documents/NetBeansProjects/TitosHotel/src/HabitacionController/HabitacionController.java</file>
-            <file>file:/Users/cervisebas/Documents/NetBeansProjects/TitosHotel/src/titoshotel/Views/MenuView.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

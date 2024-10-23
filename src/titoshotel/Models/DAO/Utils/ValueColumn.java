@@ -1,4 +1,4 @@
-package titoshotel.Models;
+package titoshotel.Models.DAO.Utils;
 
 public class ValueColumn {
     private String column;

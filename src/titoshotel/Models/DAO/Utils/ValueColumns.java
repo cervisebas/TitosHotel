@@ -1,4 +1,4 @@
-package titoshotel.Models;
+package titoshotel.Models.DAO.Utils;
 
 import java.util.ArrayList;
 import java.util.List;
