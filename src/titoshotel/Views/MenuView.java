@@ -1,20 +1,26 @@
 package titoshotel.Views;
 
 import java.awt.CardLayout;
+import titoshotel.Enum.PanelEnum;
 
 public class MenuView extends javax.swing.JFrame {
+    private HabitacionesView habitacionesView;
+    private PasajerosView pasajerosView;
 
     /**
      * Creates new form MenuView
      */
     public MenuView() {
+        this.habitacionesView = new HabitacionesView();
+        this.pasajerosView = new PasajerosView();
+        
         initComponents();
         initPanels();
     }
     
     public void initPanels() {
-        content.add(new HabitacionesView(), "habitaciones");
-        content.add(new PasajerosView(), "pasajeros");
+        content.add(this.habitacionesView, PanelEnum.HABITACIONES.name());
+        content.add(this.pasajerosView, PanelEnum.PASAJEROS.name());
     }
 
     /**
@@ -62,11 +68,11 @@ public class MenuView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void habitacionesButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_habitacionesButtonMousePressed
-        changePanel("habitaciones");
+        changePanel(PanelEnum.HABITACIONES.name());
     }//GEN-LAST:event_habitacionesButtonMousePressed
 
     private void pasajerosButtonMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pasajerosButtonMousePressed
-        changePanel("pasajeros");
+        changePanel(PanelEnum.PASAJEROS.name());
     }//GEN-LAST:event_pasajerosButtonMousePressed
 
     /**
