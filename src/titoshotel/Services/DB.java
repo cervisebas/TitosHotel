@@ -17,7 +17,7 @@ public class DB {
     private String port = "3306";
     private String database = "titos_hotel";
     private String user = "root";
-    private String password = "";
+    private String password = "Calle58744";
     
     static private Connection cn;
 
