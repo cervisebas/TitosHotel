@@ -87,7 +87,29 @@ public class PasajeroDAO implements DAO<Pasajero> {
 
     @Override
     public Pasajero get(int id) {
-        throw new UnsupportedOperationException("Unimplemented method 'get'");
+        if (!list.isEmpty()) {
+            int index = findIndexById(id);
+            if (index != -1)
+                return list.get(index);
+        }
+
+        try {
+            DB db = new DB();
+            ResultSet select = db.selecComplejo("SELECT * FROM " + tableName + " WHERE id = " + id);
+
+            if (select.next()) {
+                Pasajero pasajero = new Pasajero();
+                pasajero.setId(select.getInt("id"));
+                pasajero.setNombre(select.getString("nombre"));
+                pasajero.setApellido(select.getString("apellido"));
+                pasajero.setTelefono(select.getLong("telefono"));
+                pasajero.setDni(select.getInt("dni"));
+                return pasajero;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override

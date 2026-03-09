@@ -57,4 +57,9 @@ public class Pasajero {
     public void setDni(Integer dni) {
         this.Dni = dni;
     }
+
+    @Override
+    public String toString() {
+        return Apellido + ", " + Nombre;
+    }
 }

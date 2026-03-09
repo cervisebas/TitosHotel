@@ -15,6 +15,10 @@ public class PasajeroController {
         return dao.getAll();
     }
 
+    public Pasajero get(int id) {
+        return dao.get(id);
+    }
+
     public void save(Pasajero data) {
         dao.save(data);
     }

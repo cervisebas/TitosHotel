@@ -6,11 +6,11 @@ public class Habitacion {
     private Integer camasSimples;
     private Integer camasDobles;
     private Double precio;
-    
-    
-    public Habitacion() {}
-    
-    public Habitacion(Integer numero, Integer camasSimples, Integer camasDobles, Double precio){
+
+    public Habitacion() {
+    }
+
+    public Habitacion(Integer numero, Integer camasSimples, Integer camasDobles, Double precio) {
         this.numero = numero;
         this.camasSimples = camasSimples;
         this.camasDobles = camasDobles;
@@ -67,17 +67,16 @@ public class Habitacion {
 
     @Override
     public String toString() {
-        return "Habitaciones{" + "id=" + id + ", numero=" + numero + ", camasSimples=" + camasSimples + ", camasDobles=" + camasDobles + ", precio=" + precio + '}';
+        return "Hab. " + numero + " (C. Dobles: " + camasDobles + ", C. Simples: " + camasSimples + ") - $" + precio;
     }
-    
+
     @Override
     public Habitacion clone() {
         return new Habitacion(
-            id,
-            numero,
-            camasSimples,
-            camasDobles,
-            precio
-        );
+                id,
+                numero,
+                camasSimples,
+                camasDobles,
+                precio);
     }
 }

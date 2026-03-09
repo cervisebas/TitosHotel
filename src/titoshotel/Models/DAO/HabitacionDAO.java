@@ -12,21 +12,21 @@ import java.util.ArrayList;
 
 public class HabitacionDAO implements DAO<Habitacion> {
     private String tableName = "habitaciones";
-    
+
     private List<Habitacion> list;
     static private HabitacionDAO instance;
-    
+
     HabitacionDAO() {
         list = new ArrayList<>();
     }
-    
+
     static public HabitacionDAO getInstance() {
         if (instance == null) {
             instance = new HabitacionDAO();
         }
         return instance;
     }
-    
+
     private int findIndexById(Integer id) {
         int index = -1;
         for (int i = 0; i < list.size(); i++) {
@@ -60,13 +60,12 @@ public class HabitacionDAO implements DAO<Habitacion> {
         values.setValue("camas_simples", c.getCamasSimples());
         values.setValue("camas_dobles", c.getCamasDobles());
         values.setValue("precio", c.getPrecio());
- 
+
         db.update(tableName, c.getId(), values.getList());
-        
+
         list.set(
-            findIndexById(c.getId()),
-            c
-        );
+                findIndexById(c.getId()),
+                c);
     }
 
     @Override
@@ -84,7 +83,29 @@ public class HabitacionDAO implements DAO<Habitacion> {
 
     @Override
     public Habitacion get(int id) {
-        throw new UnsupportedOperationException("Unimplemented method 'get'");
+        if (!list.isEmpty()) {
+            int index = findIndexById(id);
+            if (index != -1)
+                return list.get(index);
+        }
+
+        try {
+            DB db = new DB();
+            ResultSet select = db.selecComplejo("SELECT * FROM " + tableName + " WHERE id = " + id);
+
+            if (select.next()) {
+                Habitacion habitacion = new Habitacion();
+                habitacion.setId(select.getInt("id"));
+                habitacion.setNumero(select.getInt("numero"));
+                habitacion.setPrecio(select.getDouble("precio"));
+                habitacion.setCamasSimples(select.getInt("camas_simples"));
+                habitacion.setCamasDobles(select.getInt("camas_dobles"));
+                return habitacion;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     @Override
@@ -92,8 +113,7 @@ public class HabitacionDAO implements DAO<Habitacion> {
         if (!list.isEmpty()) {
             return list;
         }
-        
-        
+
         List<Habitacion> habitaciones = new ArrayList<>();
         try {
             DB db = new DB();
@@ -117,5 +137,5 @@ public class HabitacionDAO implements DAO<Habitacion> {
             return habitaciones;
         }
     }
-    
+
 }

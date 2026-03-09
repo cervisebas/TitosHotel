@@ -15,6 +15,10 @@ public class HabitacionController {
         return dao.getAll();
     }
 
+    public Habitacion get(int id) {
+        return dao.get(id);
+    }
+
     public void save(Habitacion data) {
         dao.save(data);
     }

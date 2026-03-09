@@ -18,7 +18,7 @@ public class DB {
     private String database = "titos_hotel";
     private String user = "root";
     private String password = "Calle58744";
-    
+
     static private Connection cn;
 
     public DB() {
@@ -29,7 +29,7 @@ public class DB {
         url += database + "?user=";
         url += user + "&password=";
         url += password;
-        
+
         try {
             if (cn == null) {
                 cn = DriverManager.getConnection(url);
@@ -38,7 +38,7 @@ public class DB {
             e.printStackTrace();
         }
     }
-    
+
     public Integer insert(String table, List<ValueColumn> valueColumns) {
         String columns = "(";
         String values = "(";
@@ -46,7 +46,7 @@ public class DB {
         for (int i = 0; i < valueColumns.size(); i++) {
             columns += valueColumns.get(i).getColum();
             values += "?";
-            
+
             try {
                 valueColumns.get(i + 1);
                 columns += ",";
@@ -65,21 +65,19 @@ public class DB {
 
         try {
             PreparedStatement pst = cn.prepareStatement(
-                sqlInsert,
-                Statement.RETURN_GENERATED_KEYS
-            );
+                    sqlInsert,
+                    Statement.RETURN_GENERATED_KEYS);
 
             for (int i = 0; i < valueColumns.size(); i++) {
                 pst.setObject(
-                    i + 1,
-                    valueColumns.get(i).getValue()
-                );
+                        i + 1,
+                        valueColumns.get(i).getValue());
             }
 
             pst.execute();
 
             ResultSet rs = pst.getGeneratedKeys();
-            
+
             if (rs.next())
                 return rs.getInt(1);
 
@@ -134,8 +132,18 @@ public class DB {
 
         try {
             Statement pst = cn.createStatement();
-            
+
             return pst.executeQuery(sqlSelect);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public ResultSet selecComplejo(String query) {
+        try {
+            Statement pst = cn.createStatement();
+            return pst.executeQuery(query);
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
@@ -149,7 +157,7 @@ public class DB {
         try {
             PreparedStatement pst = cn.prepareStatement(sqlSelect);
             pst.setInt(1, id);
-            
+
             pst.execute();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -163,7 +171,7 @@ public class DB {
         for (int i = 0; i < valueColumns.size(); i++) {
             sqlUpdate += valueColumns.get(i).getColum();
             sqlUpdate += " = ?";
-            
+
             try {
                 valueColumns.get(i + 1);
                 sqlUpdate += ",";
@@ -179,9 +187,8 @@ public class DB {
 
             for (int i = 0; i < valueColumns.size(); i++) {
                 pst.setObject(
-                    i + 1,
-                    valueColumns.get(i).getValue()
-                );
+                        i + 1,
+                        valueColumns.get(i).getValue());
             }
 
             pst.execute();
