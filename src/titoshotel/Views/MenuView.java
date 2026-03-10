@@ -7,6 +7,7 @@ public class MenuView extends javax.swing.JFrame {
     private HabitacionesView habitacionesView;
     private PasajerosView pasajerosView;
     private ReservasView reservasView;
+    private DisponibilidadesView disponibilidadesView;
 
     /**
      * Creates new form MenuView
@@ -15,6 +16,7 @@ public class MenuView extends javax.swing.JFrame {
         this.habitacionesView = new HabitacionesView();
         this.pasajerosView = new PasajerosView();
         this.reservasView = new ReservasView();
+        this.disponibilidadesView = new DisponibilidadesView();
 
         initComponents();
         initPanels();
@@ -24,6 +26,7 @@ public class MenuView extends javax.swing.JFrame {
         content.add(this.habitacionesView, PanelEnum.HABITACIONES.name());
         content.add(this.pasajerosView, PanelEnum.PASAJEROS.name());
         content.add(this.reservasView, PanelEnum.RESERVAS.name());
+        content.add(this.disponibilidadesView, PanelEnum.DISPONIBILIDADES.name());
     }
 
     /**
@@ -41,6 +44,8 @@ public class MenuView extends javax.swing.JFrame {
         habitacionesButton = new javax.swing.JButton();
         pasajerosButton = new javax.swing.JButton();
         reservasButton = new javax.swing.JButton();
+
+        disponibilidadesButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(800, 600));
@@ -75,6 +80,14 @@ public class MenuView extends javax.swing.JFrame {
         });
         jPanel2.add(reservasButton);
 
+        disponibilidadesButton.setText("Disponibilidades");
+        disponibilidadesButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                disponibilidadesButtonMousePressed(evt);
+            }
+        });
+        jPanel2.add(disponibilidadesButton);
+
         getContentPane().add(jPanel2);
 
         pack();
@@ -91,6 +104,10 @@ public class MenuView extends javax.swing.JFrame {
     private void reservasButtonMousePressed(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_reservasButtonMousePressed
         changePanel(PanelEnum.RESERVAS.name());
     }// GEN-LAST:event_reservasButtonMousePressed
+
+    private void disponibilidadesButtonMousePressed(java.awt.event.MouseEvent evt) {
+        changePanel(PanelEnum.DISPONIBILIDADES.name());
+    }
 
     /**
      * @param args the command line arguments
@@ -144,5 +161,6 @@ public class MenuView extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton pasajerosButton;
     private javax.swing.JButton reservasButton;
+    private javax.swing.JButton disponibilidadesButton;
     // End of variables declaration//GEN-END:variables
 }
