@@ -7,6 +7,9 @@ import titoshotel.Models.Entities.Disponibilidad;
 import titoshotel.Models.Entities.Habitacion;
 import titoshotel.Models.Entities.Reserva;
 
+/**
+ * Controller para administrar la disponibilidad de las habitaciones
+ */
 public class DisponibilidadController {
 
     private HabitacionController habitacionController;
@@ -17,6 +20,14 @@ public class DisponibilidadController {
         this.reservaController = new ReservaController();
     }
 
+    /**
+     * Metodo que retorna una lista de habitaciones disponibles en un rango de
+     * fechas
+     * 
+     * @param fechaDesde Fecha desde la cual se quiere consultar la disponibilidad
+     * @param fechaHasta Fecha hasta la cual se quiere consultar la disponibilidad
+     * @return Lista de habitaciones disponibles en el rango de fechas
+     */
     public List<Disponibilidad> getDisponibilidad(Date fechaDesde, Date fechaHasta) {
         List<Disponibilidad> disponibles = new ArrayList<>();
 
@@ -44,6 +55,15 @@ public class DisponibilidadController {
         return disponibles;
     }
 
+    /**
+     * Metodo que retorna si una habitacion esta disponible en un rango de fechas
+     * 
+     * @param h          Habitacion a consultar
+     * @param fechaDesde Fecha desde la cual se quiere consultar la disponibilidad
+     * @param fechaHasta Fecha hasta la cual se quiere consultar la disponibilidad
+     * @return Retorna una valor booleano que indica si la habitacion esta
+     *         disponible o no
+     */
     public Boolean isDisponible(Habitacion h, Date fechaDesde, Date fechaHasta) {
         List<Reserva> todasLasReservas = reservaController.getAll();
 
