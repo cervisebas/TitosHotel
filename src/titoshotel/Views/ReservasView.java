@@ -5,15 +5,15 @@ import titoshotel.Controllers.HabitacionController;
 import titoshotel.Controllers.PasajeroController;
 import java.awt.CardLayout;
 import java.util.Objects;
-import java.sql.Date;
 import javax.swing.JTable;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 import titoshotel.Models.Entities.Reserva;
 import titoshotel.Models.Entities.Habitacion;
 import titoshotel.Models.Entities.Pasajero;
 import titoshotel.Views.Model.ReservasTableModel;
+
+import titoshotel.Controllers.DisponibilidadController;
 
 public class ReservasView extends javax.swing.JPanel {
 
@@ -351,7 +351,7 @@ public class ReservasView extends javax.swing.JPanel {
 
     private void addMousePressed(java.awt.event.MouseEvent evt) {
         loadComboBoxes();
-        
+
         if (actualPanel.equals("table")) {
             clearFields();
             changePanel("form");
@@ -447,6 +447,13 @@ public class ReservasView extends javax.swing.JPanel {
             Pasajero p = (Pasajero) comboPasajero.getSelectedItem();
             r.setOPasajero(p);
 
+            DisponibilidadController dc = new DisponibilidadController();
+            if (!dc.isDisponible(h, r.getFechaDesde(), r.getFechaHasta())) {
+                JOptionPane.showMessageDialog(this,
+                        "Esta habitación no está disponible para las fechas seleccionadas.");
+                return;
+            }
+
             r.setPrecio(Float.valueOf(this.fieldPrecio.getText()));
             r.setAnticipo(Float.valueOf(this.fieldAnticipo.getText()));
 
@@ -467,7 +474,7 @@ public class ReservasView extends javax.swing.JPanel {
     private void loadComboBoxes() {
         comboHabitacion.removeAllItems();
         comboPasajero.removeAllItems();
-        
+
         HabitacionController hc = new HabitacionController();
         for (Habitacion h : hc.getAll()) {
             comboHabitacion.addItem(h);
@@ -507,6 +514,13 @@ public class ReservasView extends javax.swing.JPanel {
 
             Pasajero p = (Pasajero) comboPasajero.getSelectedItem();
             nueva.setOPasajero(p);
+
+            DisponibilidadController dc = new DisponibilidadController();
+            if (!dc.isDisponible(h, nueva.getFechaDesde(), nueva.getFechaHasta())) {
+                JOptionPane.showMessageDialog(this,
+                        "Esta habitación no está disponible para las fechas seleccionadas.");
+                return;
+            }
 
             nueva.setPrecio(Float.valueOf(this.fieldPrecio.getText()));
             nueva.setAnticipo(Float.valueOf(this.fieldAnticipo.getText()));
